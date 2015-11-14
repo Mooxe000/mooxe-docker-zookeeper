@@ -1,0 +1,36 @@
+zookeeper_1:
+  restart: always
+  image: mooxe/zookeeper
+  environment:
+    MYID: 1
+  volumes:
+    - .:/root/zookeeper
+    - ./zk_1/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+  ports:
+    - "2181:2181"
+    - "2887:2888"
+    - "3887:3888"
+zookeeper_2:
+  restart: always
+  image: mooxe/zookeeper
+  environment:
+    MYID: 2
+  volumes:
+    - .:/root/zookeeper
+    - ./zk_2/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+  ports:
+    - "2182:2181"
+    - "2888:2888"
+    - "3888:3888"
+zookeeper_3:
+  restart: always
+  image: mooxe/zookeeper
+  environment:
+    MYID: 3
+  volumes:
+    - .:/root/zookeeper
+    - ./zk_3/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+  ports:
+    - "2183:2181"
+    - "2889:2888"
+    - "3889:3888"

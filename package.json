@@ -1,0 +1,32 @@
+{
+  "name": "mooxe-docker-zookeeper",
+  "version": "0.0.0",
+  "description": "docker image for zookeeper application of mooxe",
+  "author": "FooTearth <footearth@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mooxe000/mooxe-docker-zookeeper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mooxe000/mooxe-docker-zookeeper/issues"
+  },
+  "homepage": "https://github.com/Mooxe000/mooxe-docker-zookeeper",
+  "Keywords": [
+    "docker",
+    "daocloud",
+    "image"
+  ],
+  "bin": {},
+  "scripts": {
+    "build": "docker build -t mooxe/zookeeper .",
+    "rebuild": "docker build --no-cache -t mooxe/zookeeper .",
+    "in": "docker run --name=zookeeper --rm -ti -v `pwd`:/root/zookeeper mooxe/zookeeper /bin/bash",
+    "push": "docker push mooxe/zookeeper",
+    "test": "echo 'hello'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "shelljs": "^0.4.0"
+  }
+}

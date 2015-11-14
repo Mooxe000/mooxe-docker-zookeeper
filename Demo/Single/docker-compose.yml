@@ -1,0 +1,10 @@
+Zookeeper:
+  restart: always
+  image: mooxe/zookeeper
+  volumes:
+    - .:/root/zookeeper
+    - ./zk_1/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+  ports:
+    - "2181:2181"
+    - "2888:2888"
+    - "3888:3888"
