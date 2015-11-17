@@ -10,13 +10,14 @@ docker run \
   --name ${imgName}_${MYID} \
   --rm \
   -ti \
+  --net=host \
   -e MYID=${MYID} \
   -v ${cwd}/..:/root/${imgName} \
-  -v ${cwd}/../zoo.cfg:/opt/${imgName}/conf/zoo.cfg:ro \
-  -p 2181:2181 \
-  -p 2887:2888 \
-  -p 3887:3888 \
+  -v ${cwd}/zoo.cfg:/opt/${imgName}/conf/zoo.cfg:ro \
   mooxe/${imgName} \
   /bin/bash
 
+  # -p 2180:2181 \
+  # -p 2887:2888 \
+  # -p 3887:3888 \
   # -e SERVERS=192.168.99.100,192.168.99.100,192.168.99.100 \

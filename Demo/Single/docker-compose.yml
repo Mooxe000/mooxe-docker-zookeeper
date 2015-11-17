@@ -3,7 +3,7 @@ Zookeeper:
   image: mooxe/zookeeper
   volumes:
     - .:/root/zookeeper
-    - ./zk_1/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+    - ./zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
   ports:
     - "2181:2181"
     - "2888:2888"

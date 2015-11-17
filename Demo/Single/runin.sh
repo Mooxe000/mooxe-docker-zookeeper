@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
+cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+imgName="zookeeper"
+
 set -e
 
 docker run \
-  --name zookeeper \
+  --name ${imgName}_${MYID} \
   --rm \
   -ti \
-  -v $(pwd):/root/zookeeper \
-  -v $(pwd)/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro \
-  -p 2181:2181 \
-  -p 2888:2888 \
-  -p 3888:3888 \
-  mooxe/zookeeper \
+  -e MYID=${MYID} \
+  -v ${cwd}/..:/root/${imgName} \
+  -v ${cwd}/zoo.cfg:/opt/${imgName}/conf/zoo.cfg:ro \
+  mooxe/${imgName} \
   /bin/bash
 
-# zkServer.sh start-foreground
+  # -p 2181:2180 \
+  # -p 2888:2888 \
+  # -p 3888:3888 \
+  # -e SERVERS=192.168.99.100,192.168.99.100,192.168.99.100 \
