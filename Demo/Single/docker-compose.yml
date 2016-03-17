@@ -4,6 +4,9 @@ Zookeeper:
   volumes:
     - .:/root/zookeeper
     - ./zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+  entrypoint:
+    - /opt/zookeeper/bin/zkServer.sh
+  command: start-foreground
   ports:
     - "2181:2181"
     - "2888:2888"

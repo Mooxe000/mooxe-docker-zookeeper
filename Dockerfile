@@ -1,27 +1,18 @@
-FROM mooxe/base:latest
+FROM mooxe/java8
+MAINTAINER Justin Plock <justin@plock.net>
 
-MAINTAINER FooTearth "footearth@gmail.com"
+LABEL name="zookeeper" version="3.4.8"
 
-WORKDIR /root
+RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz | tar -xzf - -C /opt \
+    && mv /opt/zookeeper-3.4.8 /opt/zookeeper \
+    && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
+    && mkdir -p /tmp/zookeeper
 
-# system update
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get autoremove -y
+EXPOSE 2181 2888 3888
 
-RUN apt-get update && \
-    apt-get install -y curl openjdk-7-jre-headless python
+WORKDIR /opt/zookeeper
 
-# https://www.apache.org/mirrors/dist.html
-RUN curl -fL http://apache.arvixe.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar xzf - -C /opt && \
-    mv /opt/zookeeper-3.4.6 /opt/zookeeper
+VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 
-VOLUME /tmp/zookeeper
-
-COPY entrypoint.sh /
-
-ENTRYPOINT ["/entrypoint.sh"]
-
-ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/zookeeper/bin
-
-CMD ["zkServer.sh", "start-foreground"]
+# ENTRYPOINT ["/opt/zookeeper/bin/zkServer.sh"]
+# CMD ["start-foreground"]
