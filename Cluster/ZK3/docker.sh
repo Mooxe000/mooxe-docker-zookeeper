@@ -2,7 +2,7 @@
 
 cwd="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 imgName="zookeeper"
-MYID="2"
+MYID="3"
 
 set -e
 
@@ -15,7 +15,10 @@ docker run \
   -v ${cwd}/..:/root/${imgName} \
   -v ${cwd}/zoo.cfg:/opt/${imgName}/conf/zoo.cfg:ro \
   mooxe/${imgName} \
-  /bin/bash
+  /usr/bin/env bash -lc " \
+    echo ${MYID:-1} > /tmp/zookeeper/myid && \
+    /usr/bin/env bash
+  "
 
   # -p 2181:2181 \
   # -p 2888:2888 \

@@ -1,0 +1,39 @@
+zookeeper_1:
+  restart: always
+  image: mooxe/zookeeper
+  net: "host"
+  environment:
+    MYID: 1
+  command: >
+    bash -c "
+    echo $${MYID:-1} > /tmp/zookeeper/myid &&
+    /opt/zookeeper/bin/zkServer.sh start-foreground
+    "
+  volumes:
+    - ./ZK1/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+zookeeper_2:
+  restart: always
+  image: mooxe/zookeeper
+  net: "host"
+  environment:
+    MYID: 2
+  command: >
+    bash -c "
+    echo $${MYID:-1} > /tmp/zookeeper/myid &&
+    /opt/zookeeper/bin/zkServer.sh start-foreground
+    "
+  volumes:
+    - ./ZK2/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
+zookeeper_3:
+  restart: always
+  image: mooxe/zookeeper
+  net: "host"
+  environment:
+    MYID: 3
+  command: >
+    bash -c "
+    echo $${MYID:-1} > /tmp/zookeeper/myid &&
+    /opt/zookeeper/bin/zkServer.sh start-foreground
+    "
+  volumes:
+    - ./ZK3/zoo.cfg:/opt/zookeeper/conf/zoo.cfg:ro
